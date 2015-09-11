@@ -4,11 +4,180 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+/// <reference path="tsd/tsd.d.ts"/>
+
+import {clientInterface, tags} from 'cu-core';
+import EventEmitter from 'eventemitter3';
+
 export default class MockAPI {
-  static staticTest() {
-    console.log('staticTest');
+  private __ee: EventEmitter;
+  constructor() {
+    this.__ee = new EventEmitter();
   }
-  test() {
-    console.log('test');
-  }
+
+  initialized: boolean = false;
+  muteVolume: boolean = true;
+  mainVolume: number = 1;
+  patchResourceChannel: number = 1;
+  loginToken: string = '';
+  pktHash: string = '';
+  webAPIHost: string = '';
+  serverURL: string = '';
+  serverTime: number = 1;
+  vsync: number = 1;
+  fps: number = 1;
+  frameTime: number = 1;
+  netstats_udpPackets: number = 1;
+  netstats_udpBytes: number = 1;
+  netstats_tcpMessages: number = 1;
+  netstats_tcpBytes: number = 1;
+  netstats_players_updateBits: number = 1;
+  netstats_players_updateCount: number = 1;
+  netstats_players_newCount: number = 1;
+  netstats_players_newBits: number = 1;
+  netstats_lag: number = 1;
+  particlesRenderedCount: number = 1;
+  characters: number = 1;
+  terrain: number = 1;
+  perfHUD: string = '';
+  locationX: number = 1;
+  locationY: number = 1;
+  locationZ: number = 1;
+  serverLocationX: number = 1;
+  serverLocationY: number = 1;
+  serverLocationZ: number = 1;
+  facing: number = 1;
+  velocityX: number = 1;
+  velocityY: number = 1;
+  velocityZ: number = 1;
+  speed: number = 1;
+  horizontalSpeed: number = 1;
+  velFacing: number = 1;
+  downCollisionAngle: number = 1;
+  terrainCollisionAngle: number = 1;
+
+  OnInitialized(c: () => void): number { return 1; };
+  OnServerConnected(c: (isConnected: boolean) => void): number { return 1; };
+  OnUpdateNameplate(c: (cell: number, colorMod: number, name: string, gtag: string, title: string) => void): void {};
+  OnOpenUI(callback: (name: string) => void): void {};
+  OnCloseUI(callback: (name: string) => void): void {};
+  OnShowUI(callback: (name: string) => void): void {};
+  OnHideUI(callback: (name: string) => void): void {};
+  OnEvent(callback: (event: string, ...args: any[]) => void): void {};
+  OnAbilityNumbersChanged(callback: (abilityNumbers: string[]) => void): void {};
+  OnAbilityCooldown(c: (cooldownID: number, timeStarted: number, duration: number) => void): number { return 1; };
+  OnAbilityActive(c: (currentAbility: string, timeStarted: number, timeTriggered: number, queuedAbility: string) => any): number { return 1; };
+  OnGetItem(callback: (itemID: string, data: string) => void): void {};
+  OnItemEquipped(callback: (itemID: string) => void): void {};
+  OnItemUnequipped(callback: (itemID: string) => void): void {};
+  OnEquippedGearItemIDsChanged(callback: (gearItemIDs: string[]) => void): void {};
+  OnReceiveConfigVars(c: (configs: string) => void): void {};
+  OnReceiveConfigVar(c: (config: any) => void): void {};
+  OnConfigVarChanged(c: (isChangeSuccessful: boolean) => void): void {};
+  OnBuildingModeChanged(c: (buildingMode: boolean) => void): void {};
+  OnReceiveBlocks(c: (buildingDict: any) => void): void {};
+  OnReceiveScreenShot(c: (screenShotString: any) => void): void {};
+  OnReceiveBlockTags(c: (blockID: number, tagDict: any) => void): void {};
+  OnCopyBlueprint(c: () => void): void {};
+  OnNewBlueprint(c: (index: number, name: string) => void): void {};
+  OnAnnouncement(c: (message: string, type: number) => void): void {};
+  OnInventoryItemIDsChanged(callback: (inventoryItemIDs: string[]) => void): void {};
+  OnCharacterIDChanged(c: (id: string) => void): void {};
+  OnCharacterFactionChanged(c: (faction: number) => void): void {};
+  OnCharacterRaceChanged(c: (race: number) => void): void {};
+  OnCharacterNameChanged(c: (name: string) => void): void {};
+  OnCharacterHealthChanged(c: (health: number, maxHealth: number) => void): void {};
+  OnCharacterStaminaChanged(c: (stamina: number, maxStamina: number) => void): void {};
+  OnCharacterEffectsChanged(c: (effects: string) => void): void {};
+  OnEnemyTargetNameChanged(callback: (name: string) => void): void {};
+  OnEnemyTargetHealthChanged(callback: (health: number, maxHealth: number) => void): void {};
+  OnEnemyTargetStaminaChanged(callback: (stamina: number, maxStamina: number) => void): void {};
+  OnEnemyTargetEffectsChanged(callback: (effects: string) => void): void {};
+  OnFriendlyTargetNameChanged(callback: (name: string) => void): void {};
+  OnFriendlyTargetHealthChanged(callback: (health: number, maxHealth: number) => void): void {};
+  OnFriendlyTargetStaminaChanged(callback: (stamina: number, maxStamina: number) => void): void {};
+  OnFriendlyTargetEffectsChanged(callback: (effects: string) => void): void {};
+  OnBeginChat(c: (commandMode: number, text: string) => void): void {};
+  OnChat(c: (type: number, from: string, body: string, nick: string, iscse: boolean) => void): void {};
+  OnShowAbility(callback: (abilityID: string) => void): void {};
+  OnEditAbility(callback: (abilityID: string) => void): void {};
+  OnAbilityCreated(callback: (abilityID: string, ability: string) => void): void {};
+  OnAbilityDeleted(callback: (abilityID: string) => void): void {};
+  OnAbilityRegistered(callback: (abilityID: string, cooldowns: string, duration: number, triggerTime: number) => void): void {};
+  OnConsoleText(c: (text: string) => void): void {};
+  OnLogMessage(c: (category: string, level: number, time: string, process: number, thread: number, message: string) => void): void {};
+
+  CancelOnAbilityCooldown(c: number): void {};
+  CancelOnAbilityActive(c: number): void {};
+  CancelChangeConfig(variable: string): void {};
+  CancelAllConfigChanges(tag: tags): void {};
+  CancelBlockPlacement(): void {};
+  CancelOnServerConnected(c: number): void {};
+  CancelOnInitialized(c: number): void {};
+
+  FOV(degrees: number): void {};
+  DropLight(intensity: number, radius: number, red: number, green: number, blue: number): void {};
+  ResetLights(): void {};
+  PlaySoundEvent(id: number): void {};
+  ToggleCamera(): void {};
+  OpenUI(name: string): void {};
+  CloseUI(name: string): void {};
+  HideUI(name: string): void {};
+  ShowUI(name: string): void {};
+  ToggleUIVisibility(name: string): void {};
+  FocusUI(name: string): void {};
+  RequestInputOwnership(): void {};
+  ReleaseInputOwnership(): void {};
+  Quit(): void {};
+  CrashTheGame(): void {};
+  Listen(event: string): void {};
+  Ignore(event: string): void {};
+  Fire(event: string, ...args: any[]): void {};
+  Respawn(id: string): void {};
+  Attack(abilityID: string): void {};
+  OnAbilityError(c: (message: string) => void): void {};
+  GetItem(itemID: string): void {};
+  UnequipItem(itemID: string): void {};
+  EquipItem(itemID: string): void {};
+  SaveConfigChanges(): void {};
+  OnSavedConfigChanges(c: () => void): void {};
+  RestoreConfigDefaults(tag: tags): void {};
+  ChangeConfigVar(variable: string, value: string): void {};
+  GetConfigVars(tag: tags): void {};
+  GetConfigVar(variable: string): void {};
+  ToggleBuildingMode(): void {};
+  SetBuildingMode(c: (newMode: number) => void): void {};
+  RequestBlocks(): void {};
+  RequestBlockTags(c: (blockID: number) => void): void {};
+  ChangeBlockType(c: (newType: number) => void): void {};
+  SelectBlueprint(c: (index: number) => void): void {};
+  SaveBlueprint(c: (name: string) => void): void {};
+  RequestBlueprints(): void {};
+  CommitBlock(): void {};
+  BlockRotateX(): void {};
+  BlockRotateY(): void {};
+  BlockRotateZ(): void {};
+  RemoveIslands(): void {};
+  ApplyStability(): void {};
+  BlockFlipX(): void {};
+  BlockFlipY(): void {};
+  BlockFlipZ(): void {};
+  CopyBlueprint(): void {};
+  PasteBlueprint(): void {};
+  OpenScreenshotShare(): void {};
+  TakeScreenshot(): void {};
+  Emote(emote: number): void {};
+  SendChat(type: number, to: string, body: string): void {};
+  JoinMUC(room: string): void {};
+  LeaveMUC(room: string): void {};
+  SendSlashCommand(command: string, parameters: string): void {};
+  Stuck(): void {};
+  ChangeZone(zoneID: number): void {};
+  ShowAbility(abilityID: string): void {};
+  EditAbility(abilityID: string): void {};
+  AbilityCreated(abilityID: string, primaryBaseComponentID: string, secondaryBaseComponentID: string, ability: string): void {};
+  AbilityDeleted(abilityID: string): void {};
+  RegisterAbility(abilityID: string, primaryBaseComponentID: string, secondaryBaseComponentID: string): void {};
+  ConsoleCommand(body: string): void {};
+  Connect(host: string, port: string, character: string, webAPIHost: string): void {};
 }

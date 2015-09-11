@@ -4,5 +4,9 @@
   "ref": "master",
   "path": "src/tsd",
   "bundle": "src/tsd/tsd.d.ts",
-  "installed": {}
+  "installed": {
+    "eventemitter3/eventemitter3.d.ts": {
+      "commit": "a461a243e2e09b213bc49d12650f80d81047576d"
+    }
+  }
 }
