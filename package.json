@@ -1,0 +1,34 @@
+{
+  "name": "cu-mock-client",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MPL-2.0",
+  "main": "lib/main.js",
+  "contributors": [
+    "saddieeiddas <saddie.eiddas@gmail.com>"
+  ],
+  "keywords": [
+    "Camelot",
+    "Unchained",
+    "cu",
+    "cu-ui"
+  ],
+  "files": [
+    "lib/",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csegames/cu-boilerplate-library.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "cu-build-tools": "git+https://github.com/CUModSquad/cu-build-tools.git#master"
+  },
+  "typescript": {
+    "definition": "lib/cu-mock-client.d.ts"
+  }
+}
