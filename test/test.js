@@ -14,4 +14,10 @@ cuAPI.OnInitialized(function() {
   console.log('HideUI', 'some-ui');
   cuAPI.Fire('HideUI', 'some-ui');
 
+  cuAPI.OnReceiveBlocks(function(blocks) {
+    console.log('OnReceiveBlocks', blocks);
+  });
+
+  cuAPI.RequestBlocks();
+
 });

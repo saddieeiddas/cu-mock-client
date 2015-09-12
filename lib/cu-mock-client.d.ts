@@ -102,6 +102,7 @@ declare module 'cu-mock-client' {
         OnShowAbility(callback: (abilityID: string) => void): void;
         OnShowUI(callback: (name: string) => void): void;
         OnUpdateNameplate(c: (cell: number, colorMod: number, name: string, gtag: string, title: string) => void): void;
+        Listen(event: string, callback: Function): void;
         CancelOnAbilityActive(c: number): void;
         CancelOnAbilityCooldown(c: number): void;
         CancelOnInitialized(c: number): void;
@@ -142,7 +143,6 @@ declare module 'cu-mock-client' {
         Ignore(event: string): void;
         JoinMUC(room: string): void;
         LeaveMUC(room: string): void;
-        Listen(event: string): void;
         OnAbilityError(c: (message: string) => void): void;
         OnSavedConfigChanges(c: () => void): void;
         OpenScreenshotShare(): void;
@@ -165,7 +165,7 @@ declare module 'cu-mock-client' {
         SelectBlueprint(c: (index: number) => void): void;
         SendChat(type: number, to: string, body: string): void;
         SendSlashCommand(command: string, parameters: string): void;
-        SetBuildingMode(c: (newMode: number) => void): void;
+        SetBuildingMode(newMode: number): void;
         ShowAbility(abilityID: string): void;
         ShowUI(name: string): void;
         Stuck(): void;

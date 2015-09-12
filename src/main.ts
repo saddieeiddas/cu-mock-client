@@ -88,7 +88,7 @@ export default class MockAPI {
   locationZ: number = 1;
   _loginToken: string = '';
   get loginToken(): string {
-    if (! this._loginToken)  {
+    if (!this._loginToken) {
       this._loginToken = window.prompt('Login Token?');
       sessionStorage.setItem('mock_loginToken', this._loginToken);
     }
@@ -189,6 +189,7 @@ export default class MockAPI {
   OnShowAbility(callback: (abilityID: string) => void): void { this._mockAddEventListenerVoid('ShowAbility', callback); };
   OnShowUI(callback: (name: string) => void): void { this._mockAddEventListenerVoid('ShowUI', callback); };
   OnUpdateNameplate(c: (cell: number, colorMod: number, name: string, gtag: string, title: string) => void): void { this._mockAddEventListenerVoid('UpdateNameplate', c); };
+  Listen(event: string, callback: Function): void { this._mockAddEventListenerVoid(event, callback); };
 
   CancelOnAbilityActive(c: number): void { this._mockRemoveEventListener(c) };
   CancelOnAbilityCooldown(c: number): void { this._mockRemoveEventListener(c) };
@@ -223,7 +224,7 @@ export default class MockAPI {
     // TODO do some connection here
     this._mockEventEmitter.emit('ServerConnected', true);
   };
-  ConsoleCommand(body: string): void {};
+  ConsoleCommand(body: string): void { };
   CopyBlueprint(): void {
     this._mockEventEmitter.emit('CopyBlueprint');
   };
@@ -233,49 +234,76 @@ export default class MockAPI {
     this._mockEventEmitter.emit('EditAbility', abilityID);
   };
   Emote(emote: number): void { };
-  EquipItem(itemID: string): void { };
+  EquipItem(itemID: string): void {
+    this._mockEventEmitter.emit('ItemEquipped', itemID);
+  };
   Fire(event: string, ...args: any[]): void {
     this._mockEventEmitter.emit(event, ...args);
   };
   FocusUI(name: string): void { };
   FOV(degrees: number): void { };
-  GetConfigVar(variable: string): void { };
-  GetConfigVars(tag: tags): void { };
-  GetItem(itemID: string): void { };
-  HideUI(name: string): void { };
+  GetConfigVar(variable: string): void {
+    this._mockEventEmitter.emit('ReceiveConfigVar', 'config value'); // TODO get this from data
+  };
+  GetConfigVars(tag: tags): void {
+    this._mockEventEmitter.emit('ReceiveConfigVars', 'config value'); // TODO get this from data
+  };
+  GetItem(itemID: string): void {
+    this._mockEventEmitter.emit('GetItem', 1, 'item-data'); // TODO get this from data
+  };
+  HideUI(name: string): void {
+    this._mockEventEmitter.emit('HideUI', name);
+  };
   Ignore(event: string): void { };
   JoinMUC(room: string): void { };
   LeaveMUC(room: string): void { };
-  Listen(event: string): void { };
   OnAbilityError(c: (message: string) => void): void { };
   OnSavedConfigChanges(c: () => void): void { };
   OpenScreenshotShare(): void { };
-  OpenUI(name: string): void { };
+  OpenUI(name: string): void {
+    this._mockEventEmitter.emit('OpenUI', name);
+  };
   PasteBlueprint(): void { };
   PlaySoundEvent(id: number): void { };
   Quit(): void { };
   RegisterAbility(abilityID: string, primaryBaseComponentID: string, secondaryBaseComponentID: string): void { };
   ReleaseInputOwnership(): void { };
   RemoveIslands(): void { };
-  RequestBlocks(): void { };
-  RequestBlockTags(c: (blockID: number) => void): void { };
+  RequestBlocks(): void {
+    this._mockEventEmitter.emit('ReceiveBlocks', []); // TODO get this from data
+  };
+  RequestBlockTags(c: (blockID: number) => void): void {
+    this._mockEventEmitter.emit('ReceiveBlockTags', 'tagDict'); // TODO get this from data
+  };
   RequestBlueprints(): void { };
   RequestInputOwnership(): void { };
   ResetLights(): void { };
   Respawn(id: string): void { };
   RestoreConfigDefaults(tag: tags): void { };
-  SaveBlueprint(c: (name: string) => void): void { };
+  SaveBlueprint(c: (name: string) => void): void {
+    this._mockEventEmitter.emit('NewBlueprint', 0, name)
+  };
   SaveConfigChanges(): void { };
   SelectBlueprint(c: (index: number) => void): void { };
   SendChat(type: number, to: string, body: string): void { };
   SendSlashCommand(command: string, parameters: string): void { };
-  SetBuildingMode(c: (newMode: number) => void): void { };
-  ShowAbility(abilityID: string): void { };
-  ShowUI(name: string): void { };
+  SetBuildingMode(newMode: number): void {
+    this._mockEventEmitter.emit('BuildingModeChanged', newMode);
+  };
+  ShowAbility(abilityID: string): void {
+    this._mockEventEmitter.emit('ShowAbility', abilityID);
+  };
+  ShowUI(name: string): void {
+    this._mockEventEmitter.emit('ShowUI', name);
+  };
   Stuck(): void { };
-  TakeScreenshot(): void { };
-  ToggleBuildingMode(): void { };
+  TakeScreenshot(): void {
+    this._mockEventEmitter.emit('ReceiveScreenShot', 'screenShotString'); // TODO get this from data
+  };
+  ToggleBuildingMode(): void {};
   ToggleCamera(): void { };
   ToggleUIVisibility(name: string): void { };
-  UnequipItem(itemID: string): void { };
+  UnequipItem(itemID: string): void {
+    this._mockEventEmitter.emit('ItemUnequipped', itemID);
+  };
 }
