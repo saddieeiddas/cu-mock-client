@@ -30,7 +30,7 @@
     "files": [
         "./src/main.bundle.ts",
         "./src/main.ts",
-        "./src/tsd/eventemitter3/eventemitter3.d.ts",
+        "./src/tsd/eventemitter2/eventemitter2.d.ts",
         "./src/tsd/tsd.d.ts"
     ]
 }

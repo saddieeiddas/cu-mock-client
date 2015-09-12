@@ -5,8 +5,8 @@
   "path": "src/tsd",
   "bundle": "src/tsd/tsd.d.ts",
   "installed": {
-    "eventemitter3/eventemitter3.d.ts": {
-      "commit": "a461a243e2e09b213bc49d12650f80d81047576d"
+    "eventemitter2/eventemitter2.d.ts": {
+      "commit": "7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
     }
   }
 }
